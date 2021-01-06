@@ -6,14 +6,13 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class MessageService {
-    private MessageRepository repository;
+    private final MessageRepository repository;
 
-    @Autowired
     public MessageService(MessageRepository repository) {
         this.repository = repository;
     }
 
-    public void save(String text) {
-        this.repository.saveMessage(new Message(text));
+    public Message save(String text) {
+        return repository.saveMessage(new Message(text));
     }
 }
