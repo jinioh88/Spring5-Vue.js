@@ -6,6 +6,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.toplink.LocalSessionFactory;
 import org.springframework.orm.toplink.LocalSessionFactoryBean;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 import java.util.Arrays;
@@ -18,14 +19,6 @@ public class AppConfig {
 
     public AppConfig(DataSource dataSource) {
         this.dataSource = dataSource;
-    }
-
-    @Bean
-    public LocalSessionFactoryBean sessionFactory() {
-        LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
-        sessionFactoryBean.setDataSource(dataSource);
-
-        return sessionFactoryBean;
     }
 
     @Bean

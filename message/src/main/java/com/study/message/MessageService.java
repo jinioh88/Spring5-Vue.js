@@ -1,8 +1,10 @@
 package com.study.message;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Component
 public class MessageService {
@@ -12,7 +14,13 @@ public class MessageService {
         this.repository = repository;
     }
 
+    @Transactional
     public Message save(String text) {
         return repository.saveMessage(new Message(text));
     }
+
+//    @Transactional(readOnly = true)
+//    public List<Message> getMessages() {
+//        return repository.getMessages();
+//    }
 }

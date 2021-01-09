@@ -5,8 +5,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
-@RequestMapping("/messages")
 public class MessageController {
 
     private MessageService messageService;
@@ -21,7 +22,19 @@ public class MessageController {
         return "welcome";
     }
 
-    @PostMapping
+    @GetMapping("/messages")
+    public String index() {
+        return "index";
+    }
+
+    @GetMapping("/api/messages")
+    @ResponseBody
+    public ResponseEntity<List<Message>> getMessages() {
+        List<Message> messages = messageService.getMessages();
+        return ResponseEntity.ok(messages);
+    }
+
+    @PostMapping("/api/messages")
     @ResponseBody
     public ResponseEntity<Message> saveMessage(@RequestBody MessageData data) {
         Message saved = messageService.save(data.getText());
